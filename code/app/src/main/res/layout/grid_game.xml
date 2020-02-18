@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <GridLayout
+        android:id="@+id/ticTacToeGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:columnCount="3"
+        android:columnOrderPreserved="false"
+        android:rowCount="3">
+
+        <!-- Row 1 -->
+        <!-- Column 1 -->
+        <ImageButton
+            android:id="@+id/position11"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            android:background="@android:color/white"
+            android:contentDescription="position11"
+            android:scaleType="fitCenter"></ImageButton>
+        <!-- Column 2 -->
+        <ImageButton
+            android:id="@+id/position12"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/white"
+            android:contentDescription="position12"
+            android:scaleType="fitCenter"></ImageButton>
+        <!-- Column 3 -->
+        <ImageButton
+            android:id="@+id/position13"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            android:background="@android:color/white"
+            android:contentDescription="position13"
+            android:scaleType="fitCenter"></ImageButton>
+
+        <!-- Row 2 -->
+        <!-- Column 1 -->
+        <ImageButton
+            android:id="@+id/position21"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="5dp"
+            android:background="@android:color/white"
+            android:contentDescription="position21"
+            android:scaleType="fitCenter"></ImageButton>
+        <!-- Column 2 -->
+        <ImageButton
+            android:id="@+id/position22"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/white"
+            android:contentDescription="position22"
+            android:scaleType="fitCenter"></ImageButton>
+        <!-- Column 3 -->
+        <ImageButton
+            android:id="@+id/position23"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="5dp"
+            android:background="@android:color/white"
+            android:contentDescription="position23"
+            android:scaleType="fitCenter"></ImageButton>
+        <!-- Row 3 -->
+        <!-- Column 1 -->
+        <ImageButton
+            android:id="@+id/position31"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            android:background="@android:color/white"
+            android:contentDescription="position31"
+            android:scaleType="fitCenter"></ImageButton>
+        <!-- Column 2 -->
+        <ImageButton
+            android:id="@+id/position32"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/white"
+            android:contentDescription="position32"
+            android:scaleType="fitCenter"></ImageButton>
+        <!-- Column 3 -->
+        <ImageButton
+            android:id="@+id/position33"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            android:background="@android:color/white"
+            android:contentDescription="position33"
+            android:scaleType="fitCenter"></ImageButton>
+
+    </GridLayout>
+
+</LinearLayout>

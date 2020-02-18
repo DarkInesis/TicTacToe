@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TicTacToe</string>
+    <string name="change_page">change Page</string>
+    <string name="reset">Reset</string>
+    <string name="playernametext">playerNameText</string>
+    <string name="easy">EASY</string>
+    <string name="medium">medium</string>
+    <string name="_2_vs_2">2 vs 2</string>
+    <string name="hard">HARD</string>
+</resources>

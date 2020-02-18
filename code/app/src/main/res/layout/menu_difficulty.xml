@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/easybutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:width="200dp"
+        android:text="@string/easy" />
+
+    <Button
+        android:id="@+id/mediumbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="40dp"
+        android:width="200dp"
+        android:text="@string/medium" />
+
+    <Button
+        android:id="@+id/hardbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:text="@string/hard" />
+
+    <Button
+        android:id="@+id/twoVStwobutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/_2_vs_2" />
+</LinearLayout>
