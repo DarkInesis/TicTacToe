@@ -9,7 +9,7 @@ public class IA extends Player {
     {
         super();
         this.difficulty=difficulty;
-        this.actionsPlayed= new boolean[][] {{true,true,true}, {true,true,true}, {true,true,true}};
+        this.actionsPlayed= new boolean[][] {{false,false,false}, {false,false,false}, {false,false,false}};
     }
     public int[] play() {
         switch (this.difficulty.toUpperCase()){
@@ -29,7 +29,7 @@ public class IA extends Player {
         return null;
     }
     private int[] playEasy(){
-        int[][] gameMatrix=Game.getGame().getMyGameMatrix();
+        int[][] gameMatrix=Game.getGame().getMyGameMatrix().getValue();
         Random rand=new Random();
         int line;
         int column;
@@ -49,5 +49,30 @@ public class IA extends Player {
     private int[] playHard(){
         //temp
         return this.playEasy();
+    }
+    public boolean isWin() {
+        // Case of the player tac the central case
+        if (this.actionsPlayed[1][1]){
+            // Tests diagonals
+            if((this.actionsPlayed[0][0] && this.actionsPlayed[2][2]) ||(this.actionsPlayed[0][2] && this.actionsPlayed[2][0]))
+            {
+                return true;
+            }
+        }
+        boolean[] lineCompleted={true,true,true};
+        for(int line=0;line<3;line++)
+        {
+            if(this.actionsPlayed[line]==lineCompleted){
+                return true;
+            }
+        }
+        for(int column=0;column<3;column++){
+            // Test columns
+            if(this.actionsPlayed[0][column]&& this.actionsPlayed[1][column] && this.actionsPlayed[2][column])
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

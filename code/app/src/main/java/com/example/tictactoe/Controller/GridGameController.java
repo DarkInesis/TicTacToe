@@ -18,6 +18,13 @@ public class GridGameController{
         model.resetGame();
     }
     public int[][] getGrid(){
-        return model.getMyGameMatrix();
+        return model.getMyGameMatrix().getValue();
+    }
+    public Game getModel(){
+        return model;
+    }
+    public String getWhoWin(){return model.getWhoWin().getValue();}
+    public String getTurnOf(){
+        return model.getTurnOf().getValue();
     }
 }
