@@ -29,7 +29,8 @@ public class Player {
         boolean[] lineCompleted={true,true,true};
         for(int line=0;line<3;line++)
         {
-            if(this.actionsPlayed[line]==lineCompleted){
+            boolean[] test=this.actionsPlayed[line];
+            if(this.actionsPlayed[line][0] &&  this.actionsPlayed[line][1] && this.actionsPlayed[line][2]){
                 return true;
             }
         }
