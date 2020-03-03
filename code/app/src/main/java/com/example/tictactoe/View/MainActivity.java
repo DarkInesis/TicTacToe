@@ -9,6 +9,10 @@ import android.widget.Button;
 
 import com.example.tictactoe.Controller.MenuDifficultyController;
 import com.example.tictactoe.R;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener   {
     private MenuDifficultyController controller;
 
