@@ -4,8 +4,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
 import android.content.DialogInterface;
+import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +20,7 @@ import com.example.tictactoe.Model.Game;
 import com.example.tictactoe.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
@@ -25,16 +29,17 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private AdView bottomPub;
     private GridGameController controller;
     private Button backToMenuButton;
-    private TextView playerNameText;
+    private TextView scoreText;
     private ImageButton[] tableButtonGrid;
-    private Button ressetButton;
     private Game gameModel;
     private AlertDialog.Builder alertDialogBuilder;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        this.scoreText = findViewById(R.id.scoreText);
         backToMenuButton = findViewById(R.id.menuButton);
         backToMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +62,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         alertDialogBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+                // Reload an other Ad
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
                 controller.reset();
             }
         });
@@ -72,7 +82,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         final Observer<String> nameOfPlayerObserver = new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                playerNameText.setText(controller.getTurnOf());
+                int[] score = controller.getScore();
+                String scoreString = score[0] + " : " + score[1];
+                scoreText.setText(scoreString);
             }
         };
         final Observer<String> winnerObserver = new Observer<String>() {
@@ -101,22 +113,17 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         AdRequest adRequest = new AdRequest.Builder().build();
         bottomPub.loadAd(adRequest);
 
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-8051616064667371/8621823685");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         gameModel.getMyGameMatrix().observe(this, gridObserver);
         gameModel.getTurnOf().observe(this, nameOfPlayerObserver);
         gameModel.getWhoWin().observe(this, winnerObserver);
-
     }
 
     private void initGameLayout() {
-        playerNameText = findViewById(R.id.playerNameText);
-        ressetButton = findViewById(R.id.resetGamebutton);
-        ressetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                controller.reset();
-            }
-        });
         tableButtonGrid = new ImageButton[]{findViewById(R.id.position11), findViewById(R.id.position12), findViewById(R.id.position13),
                 findViewById(R.id.position21), findViewById(R.id.position22), findViewById(R.id.position23),
                 findViewById(R.id.position31), findViewById(R.id.position32), findViewById(R.id.position33)};
@@ -140,8 +147,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         int[][] grille = controller.getGrid();
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                int indice = i * 3 + j;
-                ImageButton image = tableButtonGrid[indice];
+                ImageButton image = tableButtonGrid[i * 3 + j];
                 if (grille[i][j] == 1) {
                     image.setImageResource(R.drawable.tic);
                 } else if (grille[i][j] == -1) {
@@ -149,6 +155,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     image.setImageDrawable(null);
                 }
+
             }
         }
     }

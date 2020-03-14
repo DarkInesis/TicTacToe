@@ -18,7 +18,8 @@ public class Game extends ViewModel {
     private boolean isPlayer1IA;
     private String difficulty;
 
-    private double consecutivesWin = 0;
+    private int[] score;
+    private double consecutivesWin;
     private boolean turnOfPlayer0;
     private int nbTurn;
 
@@ -48,6 +49,7 @@ public class Game extends ViewModel {
         this.difficulty = difficulty;
         this.isPlayer1IA = true;
         this.nbTurn = 0;
+        this.score = new int[]{0, 0};
         // Create players (Player+IA)
         this.player0 = player0;
         this.IA1 = new IA(this.difficulty);
@@ -75,6 +77,7 @@ public class Game extends ViewModel {
         this.turnOfPlayer0 = (this.randomFirstPlayer() == 0);
         this.isPlayer1IA = false;
         this.nbTurn = 0;
+        this.score = new int[]{0, 0};
         // Create players (2 Players)
         this.player0 = player0;
         this.player1 = player1;
@@ -117,9 +120,9 @@ public class Game extends ViewModel {
                 this.changeMyGameMatrix(line, column, 1);
                 turnOfPlayer0 = false;
                 this.setTurnOf();
-                this.nbTurn+=1;
+                this.nbTurn += 1;
                 if (this.isPlayer1IA) {
-                    if (!this.isWin() && this.nbTurn!=9) {
+                    if (!this.isWin() && this.nbTurn != 9) {
                         //int delay = 3 * 1000;
                         //this.playIA(delay);
                         this.playIA();
@@ -131,14 +134,19 @@ public class Game extends ViewModel {
                 this.changeMyGameMatrix(line, column, -1);
                 turnOfPlayer0 = true;
                 this.setTurnOf();
-                this.nbTurn+=1;
+                this.nbTurn += 1;
             }
             // If someone has win
             if (this.isWin()) {
+                if (player0.isWin()) {
+                    score[0] += 1;
+                } else {
+                    score[1] += 1;
+                }
                 setWhoWin(this.whoWin());
             }
             // If no one has win
-            else if (this.nbTurn==9) {
+            else if (this.nbTurn == 9) {
                 setWhoWin("nul");
             }
         }
@@ -156,12 +164,9 @@ public class Game extends ViewModel {
     private void playIA() {
         int[] positionPlayedIA = IA1.play();
         changeMyGameMatrix(positionPlayedIA[0], positionPlayedIA[1], -1);
-        if (IA1.isWin()) {
-            consecutivesWin = 0;
-        }
         this.turnOfPlayer0 = true;
         this.setTurnOf();
-        this.nbTurn+=1;
+        this.nbTurn += 1;
     }
 
     private TimerTask playIATimerTask() {
@@ -170,8 +175,8 @@ public class Game extends ViewModel {
             public void run() {
                 int[] positionPlayedIA = IA1.play();
                 changeMyGameMatrix(positionPlayedIA[0], positionPlayedIA[1], -1);
-                nbTurn+=1;
-                turnOfPlayer0=true;
+                nbTurn += 1;
+                turnOfPlayer0 = true;
                 setTurnOf();
                 if (IA1.isWin()) {
                     consecutivesWin = 0;
@@ -181,7 +186,7 @@ public class Game extends ViewModel {
     }
 
     /*#################################################################
-    #                       XXXX                           #
+    #                       XXXX                                       #
     ##################################################################*/
 
     /**
@@ -218,6 +223,13 @@ public class Game extends ViewModel {
         return "Personne";
     }
 
+    /*#################################################################
+    #                       Getters                                   #
+    ##################################################################*/
+
+    public int[] getScore() {
+        return this.score;
+    }
     /*#################################################################
     #                       MutableLiveData                           #
     ##################################################################*/

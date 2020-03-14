@@ -27,4 +27,5 @@ public class GridGameController{
     public String getTurnOf(){
         return model.getTurnOf().getValue();
     }
+    public int[] getScore(){return  model.getScore();}
 }

@@ -7,56 +7,31 @@
     android:orientation="vertical"
     tools:context=".View.GameActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/menuButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text="Menu" />
-
-        <Button
-            android:id="@+id/resetGamebutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/reset" />
-    </LinearLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/menuLayout"
+        <include
+            android:id="@+id/include"
+            layout="@layout/grid_game"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginEnd="200dp"
-            android:layout_marginBottom="200dp"
-            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/playerNameText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/playernametext" />
-
-            <include
-                layout="@layout/grid_game"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/menuButton"
+            android:layout_width="86dp"
+            android:layout_height="48dp"
+            android:layout_weight="0"
+            android:text="Menu"
+            app:layout_constraintBottom_toTopOf="@+id/BottomPub"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include" />
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/BottomPub"
@@ -68,9 +43,16 @@
             app:adUnitId="ca-app-pub-8051616064667371/8505864494"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-        </com.google.android.gms.ads.AdView>
+            app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
 
+        <include
+            layout="@layout/score_panel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
