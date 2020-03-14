@@ -1,4 +1,4 @@
-package com.example.tictactoe.Model;
+package fr.dedier.tictactoe.Model;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

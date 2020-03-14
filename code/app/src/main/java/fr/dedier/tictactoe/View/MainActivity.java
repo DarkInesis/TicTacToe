@@ -1,4 +1,4 @@
-package com.example.tictactoe.View;
+package fr.dedier.tictactoe.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,12 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.tictactoe.Controller.MenuDifficultyController;
-import com.example.tictactoe.R;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-
+import fr.dedier.tictactoe.Controller.MenuDifficultyController;
+import fr.dedier.tictactoe.R;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener   {
     private MenuDifficultyController controller;
 
