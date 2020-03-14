@@ -1,4 +1,4 @@
-package com.example.tictactoe.Model;
+package fr.dedier.tictactoe.Model;
 
 public class Player {
     private boolean[][] actionsPlayed;

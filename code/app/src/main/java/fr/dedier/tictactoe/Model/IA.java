@@ -1,4 +1,4 @@
-package com.example.tictactoe.Model;
+package fr.dedier.tictactoe.Model;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;

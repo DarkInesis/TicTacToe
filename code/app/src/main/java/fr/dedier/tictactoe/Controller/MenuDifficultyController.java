@@ -1,8 +1,8 @@
-package com.example.tictactoe.Controller;
+package fr.dedier.tictactoe.Controller;
 
 import android.content.Context;
-import com.example.tictactoe.Model.Game;
-import com.example.tictactoe.Model.Player;
+import fr.dedier.tictactoe.Model.Game;
+import fr.dedier.tictactoe.Model.Player;
 
 public class MenuDifficultyController{
     private Game model;

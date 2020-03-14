@@ -1,23 +1,20 @@
-package com.example.tictactoe.View;
+package fr.dedier.tictactoe.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
 import android.content.DialogInterface;
-import android.graphics.drawable.AnimatedVectorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ImageButton;
 
-import com.example.tictactoe.Controller.GridGameController;
-import com.example.tictactoe.Model.Game;
-import com.example.tictactoe.R;
+import fr.dedier.tictactoe.Controller.GridGameController;
+import fr.dedier.tictactoe.Model.Game;
+import fr.dedier.tictactoe.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
