@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import fr.dedier.tictactoe.Controller.GridGameController;
 import fr.dedier.tictactoe.Model.Game;
 import fr.dedier.tictactoe.R;
+
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
@@ -31,6 +32,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Game gameModel;
     private AlertDialog.Builder alertDialogBuilder;
     private InterstitialAd mInterstitialAd;
+
+    private String winnerActivity;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -59,12 +62,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         alertDialogBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
+                if (winnerActivity == "nul") {
+                    if (mInterstitialAd.isLoaded()) {
+                        mInterstitialAd.show();
+                    }
+                    // Reload an other Ad
+                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                    controller.reset();
                 }
-                // Reload an other Ad
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                controller.reset();
             }
         });
         // Get the ViewModel.
@@ -88,6 +93,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onChanged(String winner) {
                 if (!winner.isEmpty()) {
+                    winnerActivity = winner;
                     String message = "";
                     if (winner == "nul") {
                         message = "Match nul";
