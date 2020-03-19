@@ -3,6 +3,7 @@ package fr.dedier.tictactoe.Model;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.Objects;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -19,7 +20,7 @@ public class Game extends ViewModel {
     private String difficulty;
 
     private int[] score;
-    private double consecutivesWin;
+    private double consecutiveWin;
     private boolean turnOfPlayer0;
     private int nbTurn;
 
@@ -43,7 +44,7 @@ public class Game extends ViewModel {
      */
     public void newGame(Player player0, String difficulty) {
         // Initialization of the game
-        myGameMatrix = new MutableLiveData<int[][]>();
+        myGameMatrix = new MutableLiveData<>();
         myGameMatrix.setValue(new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}});
         this.turnOfPlayer0 = (this.randomFirstPlayer() == 0);
         this.difficulty = difficulty;
@@ -54,14 +55,14 @@ public class Game extends ViewModel {
         this.player0 = player0;
         this.IA1 = new IA(this.difficulty);
 
-        this.turnOf = new MutableLiveData<String>();
-        if (!this.turnOfPlayer0) // Cas ou l'IA joue en premier
+        this.turnOf = new MutableLiveData<>();
+        if (!this.turnOfPlayer0) // Case the IA plays first
         {
             this.playIA();
         }
         this.setTurnOf();
 
-        this.whoWin = new MutableLiveData<String>();
+        this.whoWin = new MutableLiveData<>();
     }
 
     /**
@@ -72,7 +73,7 @@ public class Game extends ViewModel {
      */
     public void newGame(Player player0, Player player1) {
         // Initialization of the game
-        myGameMatrix = new MutableLiveData<int[][]>();
+        myGameMatrix = new MutableLiveData<>();
         myGameMatrix.setValue(new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}});
         this.turnOfPlayer0 = (this.randomFirstPlayer() == 0);
         this.isPlayer1IA = false;
@@ -81,8 +82,8 @@ public class Game extends ViewModel {
         // Create players (2 Players)
         this.player0 = player0;
         this.player1 = player1;
-        this.whoWin = new MutableLiveData<String>();
-        this.turnOf = new MutableLiveData<String>();
+        this.whoWin = new MutableLiveData<>();
+        this.turnOf = new MutableLiveData<>();
         this.setTurnOf();
     }
 
@@ -179,7 +180,7 @@ public class Game extends ViewModel {
                 turnOfPlayer0 = true;
                 setTurnOf();
                 if (IA1.isWin()) {
-                    consecutivesWin = 0;
+                    consecutiveWin = 0;
                 }
             }
         };
@@ -196,11 +197,11 @@ public class Game extends ViewModel {
      * @param columns columns the player wants to tac
      * @return true if the case has never been played, in other case, return false
      */
-    public boolean isPlayable(int line, int columns) {
-        return (this.myGameMatrix.getValue()[line][columns] == 0);
+    private boolean isPlayable(int line, int columns) {
+        return (Objects.requireNonNull(this.myGameMatrix.getValue())[line][columns] == 0);
     }
 
-    public boolean isWin() {
+    private boolean isWin() {
         if (isPlayer1IA) {
             return (player0.isWin() || IA1.isWin());
         } else {
@@ -208,7 +209,7 @@ public class Game extends ViewModel {
         }
     }
 
-    public String whoWin() {
+    private String whoWin() {
         if (player0.isWin()) {
             return "Joueur 1";
         } else if (isPlayer1IA) {
@@ -236,21 +237,21 @@ public class Game extends ViewModel {
 
     public MutableLiveData<String> getTurnOf() {
         if (turnOf == null) {
-            turnOf = new MutableLiveData<String>();
+            turnOf = new MutableLiveData<>();
         }
         return turnOf;
     }
 
     public MutableLiveData<int[][]> getMyGameMatrix() {
         if (myGameMatrix == null) {
-            myGameMatrix = new MutableLiveData<int[][]>();
+            myGameMatrix = new MutableLiveData<>();
         }
         return myGameMatrix;
     }
 
     public MutableLiveData<String> getWhoWin() {
         if (whoWin == null) {
-            whoWin = new MutableLiveData<String>();
+            whoWin = new MutableLiveData<>();
         }
         return whoWin;
     }
@@ -272,6 +273,7 @@ public class Game extends ViewModel {
 
     private void changeMyGameMatrix(int line, int columm, int value) {
         int[][] myGameTemp = this.myGameMatrix.getValue();
+        assert myGameTemp != null;
         myGameTemp[line][columm] = value;
         this.myGameMatrix.setValue(myGameTemp);
     }
@@ -280,8 +282,7 @@ public class Game extends ViewModel {
     #                               Utils                             #
     ##################################################################*/
 
-    public int randomFirstPlayer() {
-        int entier = new Random().nextInt(1 + 1);
-        return entier;
+    private int randomFirstPlayer() {
+        return new Random().nextInt(1 + 1);
     }
 }

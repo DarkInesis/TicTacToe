@@ -1,20 +1,18 @@
 package fr.dedier.tictactoe.Model;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Random;
 
 public class IA extends Player {
     private boolean[][] actionsPlayed;
     private String difficulty;
 
-    public IA(String difficulty) {
+    IA(String difficulty) {
         super();
         this.difficulty = difficulty;
         this.actionsPlayed = new boolean[][]{{false, false, false}, {false, false, false}, {false, false, false}};
     }
 
-    public int[] play() {
+    int[] play() {
         switch (this.difficulty.toUpperCase()) {
             case "EASY": {
                 return this.playEasy();
@@ -34,14 +32,14 @@ public class IA extends Player {
         Random rand = new Random();
         int line;
         int column;
+        assert gameMatrix != null;
         do {
             line = rand.nextInt(3);
             column = rand.nextInt(3);
         } while (gameMatrix[line][column] != 0);
         // Update of actionsPlayed
         this.actionsPlayed[line][column] = true;
-        int[] position = {line, column};
-        return position;
+        return new int[]{line, column};
     }
 
     private int[] playMedium() {
@@ -59,11 +57,14 @@ public class IA extends Player {
             return blockPosition;
         }
         // If it's not possible to win : play center if possible Or play aleatory
-        else if (gameMatrix[1][1] == 0) {
-            this.actionsPlayed[1][1] = true;
-            return new int[]{1, 1};
-        } else {
-            return this.playEasy();
+        else {
+            assert gameMatrix != null;
+            if (gameMatrix[1][1] == 0) {
+                this.actionsPlayed[1][1] = true;
+                return new int[]{1, 1};
+            } else {
+                return this.playEasy();
+            }
         }
     }
 
@@ -77,6 +78,7 @@ public class IA extends Player {
         int[][] gameMatrix = Game.getGame().getMyGameMatrix().getValue();
         // Test line
         for (int line = 0; line < 3; line++) {
+            assert gameMatrix != null;
             if (this.actionsPlayed[line][0] && this.actionsPlayed[line][1] && gameMatrix[line][2] == 0) {
                 positionForWin = new int[]{line, 2};
             } else if (this.actionsPlayed[line][0] && this.actionsPlayed[line][2] && gameMatrix[line][1] == 0) {
@@ -113,7 +115,7 @@ public class IA extends Player {
                 positionForWin = new int[]{0, 2};
             }
         } else if (this.actionsPlayed[0][2] && this.actionsPlayed[2][0] && gameMatrix[1][1] == 0) {
-                positionForWin = new int[]{1, 1};
+            positionForWin = new int[]{1, 1};
         }
         return positionForWin;
     }
@@ -126,6 +128,7 @@ public class IA extends Player {
         for (int line = 0; line < 3; line++) {
             boolean[] lineBool = new boolean[3];
             for (int column = 0; column < 3; column++) {
+                assert gameMatrix != null;
                 lineBool[column] = gameMatrix[line][column] == 1;
             }
             actionsPlayedByAdversaire[line] = lineBool;
@@ -157,8 +160,8 @@ public class IA extends Player {
             } else if (actionsPlayedByAdversaire[2][2] && gameMatrix[0][0] == 0) {
                 positionForBlock = new int[]{0, 0};
             }
-        } else if (actionsPlayedByAdversaire[0][0] && actionsPlayedByAdversaire[2][2] && gameMatrix[1][1] == 0){
-                positionForBlock = new int[]{1, 1};
+        } else if (actionsPlayedByAdversaire[0][0] && actionsPlayedByAdversaire[2][2] && gameMatrix[1][1] == 0) {
+            positionForBlock = new int[]{1, 1};
         }
         // Test diagonal right -> left
         if (actionsPlayedByAdversaire[1][1]) {
@@ -181,7 +184,6 @@ public class IA extends Player {
                 return true;
             }
         }
-        boolean[] lineCompleted = {true, true, true};
         for (int line = 0; line < 3; line++) {
             if (this.actionsPlayed[line][0] && this.actionsPlayed[line][1] && this.actionsPlayed[line][2]) {
                 return true;
