@@ -9,7 +9,8 @@ import android.widget.Button;
 
 import fr.dedier.tictactoe.Controller.MenuDifficultyController;
 import fr.dedier.tictactoe.R;
-public class MainActivity extends AppCompatActivity implements View.OnClickListener   {
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private MenuDifficultyController controller;
 
     private Button easyButton;
@@ -21,17 +22,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.controller = new MenuDifficultyController(this);
-        easyButton=findViewById(R.id.easybutton);
-        mediumButton=findViewById(R.id.mediumbutton);
-        hardButton=findViewById(R.id.hardbutton);
+        this.controller = new MenuDifficultyController();
+        easyButton = findViewById(R.id.easybutton);
+        mediumButton = findViewById(R.id.mediumbutton);
+        hardButton = findViewById(R.id.hardbutton);
         easyButton.setOnClickListener(this);
         mediumButton.setOnClickListener(this);
         hardButton.setOnClickListener(this);
         easyButton.setTag(0);
         mediumButton.setTag(1);
         hardButton.setTag(2);
-        twoVStwobutton=findViewById(R.id.twoVStwobutton);
+        twoVStwobutton = findViewById(R.id.twoVStwobutton);
         twoVStwobutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,29 +41,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
     private void goToGameActivity() {
         Intent gameActivity = new Intent(this, GameActivity.class);
         startActivity(gameActivity);
     }
+
     @Override
     public void onClick(View v) {
         int tag = (int) v.getTag();
-        if ( tag<=2 &&tag>=0){
-            String difficulty="";
-            switch (tag){
-                case 0:
-                {
-                    difficulty="EASY";
+        if (tag <= 2 && tag >= 0) {
+            String difficulty = "";
+            switch (tag) {
+                case 0: {
+                    difficulty = "EASY";
                     break;
                 }
-                case 1:
-                {
-                    difficulty="MEDIUM";
+                case 1: {
+                    difficulty = "MEDIUM";
                     break;
                 }
-                case 2:
-                {
-                    difficulty="HARD";
+                case 2: {
+                    difficulty = "HARD";
                     break;
                 }
             }

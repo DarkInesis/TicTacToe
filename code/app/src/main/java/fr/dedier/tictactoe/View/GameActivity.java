@@ -48,7 +48,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         this.initGameLayout();
-        this.controller = new GridGameController(this);
+        this.controller = new GridGameController();
         // init builder pop-up
         alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("");
@@ -62,14 +62,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         alertDialogBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (winnerActivity == "nul") {
+                if (winnerActivity.equals("nul")) {
                     if (mInterstitialAd.isLoaded()) {
                         mInterstitialAd.show();
                     }
                     // Reload an other Ad
                     mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                    controller.reset();
                 }
+                controller.reset();
             }
         });
         // Get the ViewModel.
@@ -94,8 +94,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             public void onChanged(String winner) {
                 if (!winner.isEmpty()) {
                     winnerActivity = winner;
-                    String message = "";
-                    if (winner == "nul") {
+                    String message;
+                    if (winner.equals("nul")) {
                         message = "Match nul";
                     } else {
                         message = winner + " a gagné";
@@ -143,7 +143,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         int column = tag % 3;
         int line = (tag - tag % 3) / 3;
         controller.play(line, column);
-        int[][] grid = controller.getGrid();
     }
 
     private void updateGridLayout() {
