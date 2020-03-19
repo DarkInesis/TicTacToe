@@ -4,7 +4,9 @@ import java.util.Random;
 
 public class IA extends Player {
     private boolean[][] actionsPlayed;
+    private boolean IAPlayedFirst;
     private String difficulty;
+    private int firstPositionPlayed; // For hard difficulty
 
     IA(String difficulty) {
         super();
@@ -51,7 +53,7 @@ public class IA extends Player {
             this.actionsPlayed[winPosition[0]][winPosition[1]] = true;
             return winPosition;
         }
-        // If the adversaire can win, block him
+        // If the adversary can win, block him
         else if (blockPosition[0] != -1 && blockPosition[1] != -1) {
             this.actionsPlayed[blockPosition[0]][blockPosition[1]] = true;
             return blockPosition;
@@ -69,8 +71,76 @@ public class IA extends Player {
     }
 
     private int[] playHard() {
-        //temp
-        return this.playMedium();
+        int nbTurn = Game.getGame().getNbTurn();
+        if (nbTurn == 0) {
+            IAPlayedFirst = true;
+        } else if (nbTurn == 1) {
+            IAPlayedFirst = false;
+        }
+        int[] blockPosition = this.positionForBlock();
+        // If it's possible to win, play the move needed for win
+        int[] winPosition = this.positionForWin();
+        if (winPosition[0] != -1 && winPosition[1] != -1) {
+            this.actionsPlayed[winPosition[0]][winPosition[1]] = true;
+            return winPosition;
+        }
+        // If the adversary can win, block him
+        else if (blockPosition[0] != -1 && blockPosition[1] != -1) {
+            this.actionsPlayed[blockPosition[0]][blockPosition[1]] = true;
+            return blockPosition;
+        }
+        // If it's not possible to win : play the better you can
+        else {
+            return playTheBetterYouCan(nbTurn);
+        }
+    }
+
+    private int[] playTheBetterYouCan(int nbTurn) {
+        if (IAPlayedFirst) {
+            // We play hard when we have the first move
+            int[] positionToPlay;
+            Random rand = new Random();
+            int[][] gameMatrix = Game.getGame().getMyGameMatrix().getValue();
+            int[][] positionOfCorner = {{0, 0}, {2, 0}, {2, 2}, {0, 2}};
+            if (nbTurn == 0) {
+                // Turn 0
+                // We play the first move on a corner and wait a mistake.
+                firstPositionPlayed = rand.nextInt(3);
+                positionToPlay = positionOfCorner[firstPositionPlayed];
+                this.actionsPlayed[positionToPlay[0]][positionToPlay[1]] = true;
+                return positionToPlay;
+            } else if (nbTurn == 2) {
+                // Turn 2
+                // We play the opposite corner of our first move if it's possible. If not play into a corner
+                int oppositePosition = Math.floorMod(firstPositionPlayed - 2, 4);
+                int[] positionToPlaySecondTurn = positionOfCorner[oppositePosition];
+                assert gameMatrix != null;
+                if (gameMatrix[positionToPlaySecondTurn[0]][positionToPlaySecondTurn[1]] == 0) {
+                    positionToPlay = positionToPlaySecondTurn;
+                } else {
+                    positionToPlay = positionOfCorner[Math.floorMod(oppositePosition - 1,4)];
+                }
+                this.actionsPlayed[positionToPlay[0]][positionToPlay[1]] = true;
+                return positionToPlay;
+            } else if (nbTurn == 4) {
+                // Turn 4
+                // We play a corner. If we are here it's because the player doesn't played in center and a intermediary move
+                for (int[] positionCorner : positionOfCorner) {
+                    assert gameMatrix != null;
+                    if (gameMatrix[positionCorner[0]][positionCorner[1]] == 0) {
+                        positionToPlay = positionCorner;
+                        this.actionsPlayed[positionToPlay[0]][positionToPlay[1]] = true;
+                        return positionToPlay;
+                    }
+                }
+            } else {
+                // Should never append
+                return playMedium();
+            }
+        } else {
+            return playEasy();
+        }
+        return null;
     }
 
     private int[] positionForWin() {

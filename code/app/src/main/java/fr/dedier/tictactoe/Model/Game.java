@@ -231,6 +231,9 @@ public class Game extends ViewModel {
     public int[] getScore() {
         return this.score;
     }
+    public int getNbTurn(){
+        return this.nbTurn;
+    }
     /*#################################################################
     #                       MutableLiveData                           #
     ##################################################################*/
