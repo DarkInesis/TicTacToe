@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="fr.dedier.tictactoe"
     android:versionCode="1"
-    android:versionName="0.1">
+    android:versionName="0.1.2">
 
     <application
         android:debuggable="false"
