@@ -12,6 +12,15 @@
         android:layout_height="match_parent">
 
         <include
+            layout="@layout/score_panel"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
             android:id="@+id/include"
             layout="@layout/grid_game"
             android:layout_width="wrap_content"
@@ -23,10 +32,10 @@
 
         <Button
             android:id="@+id/menuButton"
-            android:layout_width="86dp"
-            android:layout_height="48dp"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
             android:layout_weight="0"
-            android:text="Menu"
+            android:text="@string/menu"
             app:layout_constraintBottom_toTopOf="@+id/BottomPub"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -44,15 +53,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
-
-        <include
-            layout="@layout/score_panel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
