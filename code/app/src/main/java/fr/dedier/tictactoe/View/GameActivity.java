@@ -62,14 +62,23 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         alertDialogBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+<<<<<<< HEAD:code/app/src/main/java/fr/dedier/tictactoe/View/GameActivity.java
                 if (winnerActivity.equals("nul")) {
+=======
+                if (winnerActivity == "nul") {
+>>>>>>> Developpe:code/app/src/main/java/com/example/tictactoe/View/GameActivity.java
                     if (mInterstitialAd.isLoaded()) {
                         mInterstitialAd.show();
                     }
                     // Reload an other Ad
                     mInterstitialAd.loadAd(new AdRequest.Builder().build());
+<<<<<<< HEAD:code/app/src/main/java/fr/dedier/tictactoe/View/GameActivity.java
                 }
                 controller.reset();
+=======
+                    controller.reset();
+                }
+>>>>>>> Developpe:code/app/src/main/java/com/example/tictactoe/View/GameActivity.java
             }
         });
         // Get the ViewModel.
@@ -94,8 +103,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             public void onChanged(String winner) {
                 if (!winner.isEmpty()) {
                     winnerActivity = winner;
+<<<<<<< HEAD:code/app/src/main/java/fr/dedier/tictactoe/View/GameActivity.java
                     String message;
                     if (winner.equals("nul")) {
+=======
+                    String message = "";
+                    if (winner == "nul") {
+>>>>>>> Developpe:code/app/src/main/java/com/example/tictactoe/View/GameActivity.java
                         message = "Match nul";
                     } else {
                         message = winner + " a gagné";

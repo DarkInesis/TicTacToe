@@ -9,8 +9,12 @@ import android.widget.Button;
 
 import fr.dedier.tictactoe.Controller.MenuDifficultyController;
 import fr.dedier.tictactoe.R;
+<<<<<<< HEAD:code/app/src/main/java/fr/dedier/tictactoe/View/MainActivity.java
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+=======
+public class MainActivity extends AppCompatActivity implements View.OnClickListener   {
+>>>>>>> Developpe:code/app/src/main/java/com/example/tictactoe/View/MainActivity.java
     private MenuDifficultyController controller;
 
     private Button easyButton;

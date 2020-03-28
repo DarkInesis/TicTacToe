@@ -17,6 +17,9 @@
         tools:ignore="HardcodedDebugMode">
         <activity android:name=".View.GameActivity"></activity>
         <activity android:name=".View.MainActivity">
+
+        </activity>
+        <activity android:name=".View.LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,6 +31,9 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value= "ca-app-pub-8051616064667371~8571882483"/>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
     </application>
 
