@@ -9,12 +9,8 @@ import android.widget.Button;
 
 import fr.dedier.tictactoe.Controller.MenuDifficultyController;
 import fr.dedier.tictactoe.R;
-<<<<<<< HEAD:code/app/src/main/java/fr/dedier/tictactoe/View/MainActivity.java
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-=======
-public class MainActivity extends AppCompatActivity implements View.OnClickListener   {
->>>>>>> Developpe:code/app/src/main/java/com/example/tictactoe/View/MainActivity.java
     private MenuDifficultyController controller;
 
     private Button easyButton;
@@ -26,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.controller = new MenuDifficultyController();
+        this.controller = new MenuDifficultyController(this);
         easyButton = findViewById(R.id.easybutton);
         mediumButton = findViewById(R.id.mediumbutton);
         hardButton = findViewById(R.id.hardbutton);
