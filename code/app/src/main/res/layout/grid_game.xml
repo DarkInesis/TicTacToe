@@ -1,103 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <GridLayout
-        android:id="@+id/ticTacToeGrid"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/black"
-        android:columnCount="3"
-        android:columnOrderPreserved="false"
-        android:rowCount="3">
+        android:background="@drawable/grille">
 
-        <!-- Row 1 -->
-        <!-- Column 1 -->
         <ImageButton
             android:id="@+id/position11"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_margin="5dp"
-            android:background="@android:color/white"
-            android:contentDescription="position11"
-            android:scaleType="fitCenter"></ImageButton>
-        <!-- Column 2 -->
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"></ImageButton>
+
         <ImageButton
             android:id="@+id/position12"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="5dp"
-            android:background="@android:color/white"
-            android:contentDescription="position12"
-            android:scaleType="fitCenter"></ImageButton>
-        <!-- Column 3 -->
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/position11"
+            app:layout_constraintTop_toTopOf="@+id/position11"
+            app:layout_constraintVertical_bias="0.0"></ImageButton>
+
         <ImageButton
             android:id="@+id/position13"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_margin="5dp"
-            android:background="@android:color/white"
-            android:contentDescription="position13"
-            android:scaleType="fitCenter"></ImageButton>
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/position12"
+            app:layout_constraintTop_toTopOf="@+id/position12"></ImageButton>
 
-        <!-- Row 2 -->
-        <!-- Column 1 -->
         <ImageButton
             android:id="@+id/position21"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginLeft="5dp"
-            android:background="@android:color/white"
-            android:contentDescription="position21"
-            android:scaleType="fitCenter"></ImageButton>
-        <!-- Column 2 -->
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/position11"></ImageButton>
+
         <ImageButton
             android:id="@+id/position22"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@android:color/white"
-            android:contentDescription="position22"
-            android:scaleType="fitCenter"></ImageButton>
-        <!-- Column 3 -->
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="@+id/position12"
+            app:layout_constraintTop_toTopOf="@+id/position21"></ImageButton>
+
         <ImageButton
             android:id="@+id/position23"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginLeft="5dp"
-            android:background="@android:color/white"
-            android:contentDescription="position23"
-            android:scaleType="fitCenter"></ImageButton>
-        <!-- Row 3 -->
-        <!-- Column 1 -->
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="@+id/position13"
+            app:layout_constraintTop_toTopOf="@+id/position22"></ImageButton>
+
         <ImageButton
             android:id="@+id/position31"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_margin="5dp"
-            android:background="@android:color/white"
-            android:contentDescription="position31"
-            android:scaleType="fitCenter"></ImageButton>
-        <!-- Column 2 -->
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/position21"
+            app:layout_constraintTop_toBottomOf="@+id/position21"></ImageButton>
+
         <ImageButton
             android:id="@+id/position32"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="5dp"
-            android:background="@android:color/white"
-            android:contentDescription="position32"
-            android:scaleType="fitCenter"></ImageButton>
-        <!-- Column 3 -->
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/position31"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/position22"
+            app:layout_constraintTop_toTopOf="@+id/position31"
+            app:layout_constraintVertical_bias="0.0"></ImageButton>
+
         <ImageButton
             android:id="@+id/position33"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_margin="5dp"
-            android:background="@android:color/white"
-            android:contentDescription="position33"
-            android:scaleType="fitCenter"></ImageButton>
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/position31"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/position23"
+            app:layout_constraintTop_toTopOf="@+id/position31"
+            app:layout_constraintVertical_bias="0.0"></ImageButton>
 
-    </GridLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>
+</RelativeLayout>

@@ -4,4 +4,9 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="black">#000</color>
+    <color name="vertFluo">#00CC00 </color>
+    <color name="loadingBorder">#FFFF00  </color>
+    <color name="loadingStart">#39184B </color>
+    <color name="loadingEnd">#FFACC1  </color>
+    <color name="violetBackground">#39184B</color>
 </resources>

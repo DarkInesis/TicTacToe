@@ -3,12 +3,16 @@ package fr.dedier.tictactoe.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ImageButton;
 
@@ -32,8 +36,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Game gameModel;
     private AlertDialog.Builder alertDialogBuilder;
     private InterstitialAd mInterstitialAd;
-
     private String winnerActivity;
+    private Dialog dialogBox;
+    private Button retryButtonPopUp;
+    private Button menuButtonPopUp;
+    private TextView messageEndGame;
+    private ImageView winnerImage;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -50,28 +58,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         this.initGameLayout();
         this.controller = new GridGameController(this);
         // init builder pop-up
-        alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("");
-        alertDialogBuilder.setCancelable(false);
-        alertDialogBuilder.setNegativeButton("Menu", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                backToMenu();
-            }
-        });
-        alertDialogBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (winnerActivity.equals("nul")) {
-                    if (mInterstitialAd.isLoaded()) {
-                        mInterstitialAd.show();
-                    }
-                    // Reload an other Ad
-                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                }
-                controller.reset();
-            }
-        });
+        initPopUp();
         // Get the ViewModel.
         gameModel = controller.getModel();
         // Create the observer which updates the UI.
@@ -96,13 +83,25 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     winnerActivity = winner;
                     String message;
                     if (winner.equals("nul")) {
-                        message = "Match nul";
+                        message = getString(R.string.nulMessage);
+                        winnerImage.setImageResource(0);
                     } else {
-                        message = winner + " a gagné";
+                        if(winner=="Joueur 1"){
+                            winnerImage.setImageResource(R.drawable.ic_icone_planete);
+                            message = getString(R.string.winnerMessage);
+                        }
+                        else if(winner=="Joueur 2"){
+                            winnerImage.setImageResource(R.drawable.ic_icone_vaisseau);
+                            message = getString(R.string.winnerMessage);
+                        }
+                        else{
+                            winnerImage.setImageResource(R.drawable.ic_icone_vaisseau);
+                            message = getString(R.string.looserMessage);
+                        }
+
                     }
-                    alertDialogBuilder.setMessage(message);
-                    AlertDialog alertDialog = alertDialogBuilder.create();
-                    alertDialog.show();
+                    messageEndGame.setText(message);
+                    dialogBox.show();
                 }
             }
         };
@@ -151,15 +150,74 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             for (int j = 0; j < 3; j++) {
                 ImageButton image = tableButtonGrid[i * 3 + j];
                 if (grille[i][j] == 1) {
-                    image.setImageResource(R.drawable.tic);
+                    image.setImageResource(R.drawable.ic_icone_planete);
                 } else if (grille[i][j] == -1) {
-                    image.setImageResource(R.drawable.tac);
+                    image.setImageResource(R.drawable.ic_icone_vaisseau);
                 } else {
                     image.setImageDrawable(null);
                 }
 
             }
         }
+    }
+    private void initPopUp(){
+        dialogBox=new Dialog(this);
+        dialogBox.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialogBox.setCancelable(false);
+        dialogBox.setContentView(R.layout.pop_up_game_finished);
+
+        messageEndGame=dialogBox.findViewById(R.id.messageEndGame);
+        winnerImage=dialogBox.findViewById(R.id.winnerImage);
+        // Init buttons
+        retryButtonPopUp=dialogBox.findViewById(R.id.retryButtonPopUp);
+        menuButtonPopUp=dialogBox.findViewById(R.id.menuButtonPopUp);
+        retryButtonPopUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (winnerActivity.equals("nul")) {
+                    if (mInterstitialAd.isLoaded()) {
+                        mInterstitialAd.show();
+                    }
+                    // Reload an other Ad
+                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                }
+                controller.reset();
+                dialogBox.cancel();
+            }
+        });
+        menuButtonPopUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backToMenu();
+                dialogBox.cancel();
+            }
+        });
+
+
+    }
+    private void initPopUpBackup(){
+        alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("");
+        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.setNegativeButton("Menu", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                backToMenu();
+            }
+        });
+        alertDialogBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (winnerActivity.equals("nul")) {
+                    if (mInterstitialAd.isLoaded()) {
+                        mInterstitialAd.show();
+                    }
+                    // Reload an other Ad
+                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                }
+                controller.reset();
+            }
+        });
     }
 
     private void backToMenu() {

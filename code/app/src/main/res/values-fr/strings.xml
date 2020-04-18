@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TicTacToe</string>
+    <string name="looserMessage">PERDU</string>
+    <string name="nulMessage">MATCH NUL</string>
+    <string name="retry">REJOUER</string>
+    <string name="winnerMessage">GAGNÉ</string>
+    <string name="menu">MENU</string>
+    <string name="loading">Chargement...</string>
+    <string name="hard">DIFFICILE</string>
+    <string name="medium">MOYEN</string>
+    <string name="easy">FACILE</string>
+</resources>
