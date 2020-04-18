@@ -1,13 +1,20 @@
 <resources>
     <string name="app_name">TicTacToe</string>
-    <string name="change_page">change Page</string>
-    <string name="reset">Reset</string>
-    <string name="playernametext">playerNameText</string>
+    <string name="change_page" translatable="false">change Page</string>
+    <string name="reset" translatable="false">Reset</string>
+    <string name="playernametext" translatable="false">playerNameText</string>
     <string name="easy">EASY</string>
-    <string name="medium">medium</string>
-    <string name="_2_vs_2">2 vs 2</string>
+    <string name="medium">MEDIUM</string>
     <string name="hard">HARD</string>
-    <string name="_1_vs_1">1 VS 1</string>
-    <string name="loading">Loading</string>
-    <string name="menu">Menu</string>
+    <string name="_1_vs_1" translatable="false">1 VS 1</string>
+    <string name="loading">Loading...</string>
+    <string name="menu">MENU</string>
+    <string name="tic_tac_toe" translatable="false">TIC TAC TOE</string>
+    <string name="winnerMessage">YOU WON</string>
+    <string name="retry">RETRY</string>
+    <string name="nulMessage">TIE GAME</string>
+    <string name="looserMessage">YOU LOOSED</string>
+    <string name="namePlayer1" translatable="false">Joueur 1</string>
+    <string name="namePlayer2" translatable="false">Joueur 2</string>
+    <string name="computer" translatable="false">Ordinateur</string>
 </resources>

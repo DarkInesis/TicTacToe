@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="widthButton">200dp</dimen>
+    <dimen name="heightButton">50dp</dimen>
+    <dimen name="marginMenu">50dp</dimen>
+</resources>

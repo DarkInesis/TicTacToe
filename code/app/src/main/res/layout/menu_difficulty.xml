@@ -7,26 +7,31 @@
     <Button
         android:id="@+id/easybutton"
 
-        android:layout_width="200dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/widthButton"
+        android:layout_height="@dimen/heightButton"
+        android:layout_marginBottom="@dimen/marginMenu"
         android:text="@string/easy" />
 
     <Button
         android:id="@+id/mediumbutton"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/widthButton"
+        android:layout_height="@dimen/heightButton"
+        android:layout_marginBottom="@dimen/marginMenu"
         android:text="@string/medium" />
 
     <Button
         android:id="@+id/hardbutton"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/widthButton"
+        android:layout_height="@dimen/heightButton"
+        android:layout_marginBottom="@dimen/marginMenu"
+        android:fontFamily="@font/orbitron"
+        android:forceHasOverlappingRendering="false"
         android:text="@string/hard" />
 
     <Button
         android:id="@+id/twoVStwobutton"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/widthButton"
+        android:layout_height="@dimen/heightButton"
         android:hapticFeedbackEnabled="false"
         android:text="@string/_1_vs_1" />
 </LinearLayout>
