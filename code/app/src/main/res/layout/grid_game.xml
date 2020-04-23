@@ -16,7 +16,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -29,7 +29,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/position11"
             app:layout_constraintTop_toTopOf="@+id/position11"
@@ -40,7 +40,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/position12"
             app:layout_constraintTop_toTopOf="@+id/position12"></ImageButton>
@@ -50,7 +50,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/position11"></ImageButton>
 
@@ -59,7 +59,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="@+id/position12"
             app:layout_constraintTop_toTopOf="@+id/position21"></ImageButton>
 
@@ -68,7 +68,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="@+id/position13"
             app:layout_constraintTop_toTopOf="@+id/position22"></ImageButton>
 
@@ -77,7 +77,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/position21"
             app:layout_constraintTop_toBottomOf="@+id/position21"></ImageButton>
@@ -87,7 +87,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="@+id/position31"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -100,7 +100,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="@+id/position31"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
