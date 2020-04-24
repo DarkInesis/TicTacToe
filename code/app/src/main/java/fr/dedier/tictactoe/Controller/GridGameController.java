@@ -12,7 +12,7 @@ public class GridGameController{
         this.model=Game.getGame();
     }
     public void play(int line,int column){
-        model.getGame().play(line,column);
+        Game.getGame().playManager(line,column);
     }
     public void reset(){
         model.resetGame();

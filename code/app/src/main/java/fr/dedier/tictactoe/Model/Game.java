@@ -1,12 +1,12 @@
 package fr.dedier.tictactoe.Model;
 
+import android.os.Handler;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.Objects;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Game extends ViewModel {
     private MutableLiveData<int[][]> myGameMatrix;
@@ -23,7 +23,8 @@ public class Game extends ViewModel {
     private double consecutiveWin;
     private boolean turnOfPlayer0;
     private int nbTurn;
-
+    private boolean IACanPlay=true;
+    private long dateLastPlay=System.nanoTime();
     private static class SingletonHolder {
         private static final Game instance = new Game();
     }
@@ -58,7 +59,15 @@ public class Game extends ViewModel {
         this.turnOf = new MutableLiveData<>();
         if (!this.turnOfPlayer0) // Case the IA plays first
         {
-            this.playIA();
+            IACanPlay=false;
+            Runnable startIArunnable=new Runnable() {
+                @Override
+                public void run() {
+                    playIA();
+                    IACanPlay=true;
+                }
+            };
+            new Handler().postDelayed(startIArunnable,(long) 1 * 1000);
         }
         this.setTurnOf();
 
@@ -113,7 +122,22 @@ public class Game extends ViewModel {
     /*#################################################################
     #                            Manage Play                          #
     ##################################################################*/
-
+    public void playManager(final int line, final int column){
+        Runnable runPlay=new Runnable() {
+            @Override
+            public void run() {
+                play(line,column);
+            }
+        };
+        long delay= (long) 0.5* 1000 * 1000 * 1000;
+        if((System.nanoTime()-dateLastPlay)<delay){
+            new Handler().postDelayed(runPlay,delay);
+            dateLastPlay=System.nanoTime();
+        }
+        else{
+            play(line, column);
+        }
+    }
     public void play(int line, int column) {
         if (this.isPlayable(line, column)) {
             if (this.turnOfPlayer0) {
@@ -123,10 +147,29 @@ public class Game extends ViewModel {
                 this.setTurnOf();
                 this.nbTurn += 1;
                 if (this.isPlayer1IA) {
-                    if (!this.isWin() && this.nbTurn != 9) {
-                        //int delay = 3 * 1000;
-                        //this.playIA(delay);
-                        this.playIA();
+                    if (!this.isWin() && this.nbTurn != 9 && IACanPlay) {
+                        IACanPlay=false;
+                        Runnable runnable=new Runnable() {
+                            @Override
+                            public void run() {
+                                playIA();
+                                // If someone has win
+                                if (isWin()) {
+                                    if (player0.isWin()) {
+                                        score[0] += 1;
+                                    } else {
+                                        score[1] += 1;
+                                    }
+                                    setWhoWin(whoWin());
+                                }
+                                // If no one has win
+                                else if (nbTurn == 9) {
+                                    setWhoWin("nul");
+                                }
+                                IACanPlay=true;
+                            }
+                        };
+                        new Handler().postDelayed(runnable,1*1000);
                     }
                 }
             } else if (!this.isPlayer1IA) {
@@ -156,12 +199,6 @@ public class Game extends ViewModel {
     /*#################################################################
     #                            Play IA                              #
     ##################################################################*/
-
-    private void playIA(int delay) {
-        Timer timer = new Timer();
-        timer.schedule(this.playIATimerTask(), delay);
-    }
-
     private void playIA() {
         int[] positionPlayedIA = IA1.play();
         changeMyGameMatrix(positionPlayedIA[0], positionPlayedIA[1], -1);
@@ -169,23 +206,6 @@ public class Game extends ViewModel {
         this.setTurnOf();
         this.nbTurn += 1;
     }
-
-    private TimerTask playIATimerTask() {
-        return new TimerTask() {
-            @Override
-            public void run() {
-                int[] positionPlayedIA = IA1.play();
-                changeMyGameMatrix(positionPlayedIA[0], positionPlayedIA[1], -1);
-                nbTurn += 1;
-                turnOfPlayer0 = true;
-                setTurnOf();
-                if (IA1.isWin()) {
-                    consecutiveWin = 0;
-                }
-            }
-        };
-    }
-
     /*#################################################################
     #                       XXXX                                       #
     ##################################################################*/

@@ -3,14 +3,14 @@ package fr.dedier.tictactoe.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 
+import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Path;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -132,6 +132,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < 9; i++) {
             tableButtonGrid[i].setOnClickListener(this);
             tableButtonGrid[i].setTag(i);
+            tableButtonGrid[i].setImageDrawable(null);
         }
 
     }
@@ -145,18 +146,34 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void updateGridLayout() {
-        int[][] grille = controller.getGrid();
+        int[][]grille= controller.getGrid();
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                ImageButton image = tableButtonGrid[i * 3 + j];
-                if (grille[i][j] == 1) {
-                    image.setImageResource(R.drawable.ic_icone_planete);
-                } else if (grille[i][j] == -1) {
-                    image.setImageResource(R.drawable.ic_icone_vaisseau);
-                } else {
-                    image.setImageDrawable(null);
-                }
-
+                    ImageButton image = tableButtonGrid[i * 3 + j];
+                    if (image.getDrawable() == null) {
+                        float x_dest=image.getX();
+                        float y_dest=image.getY();
+                        Path path=new Path();
+                        path.moveTo(0,y_dest);
+                        path.lineTo(x_dest,y_dest);
+                        ObjectAnimator animator=ObjectAnimator.ofFloat(image,View.X,View.Y,path);
+                        animator.setDuration(800);
+                        if (grille[i][j] == 1) {
+                            image.setImageResource(R.drawable.ic_icone_planete);
+                            animator.start();
+                        } else if (grille[i][j] == -1) {
+                            image.setImageResource(R.drawable.ic_icone_vaisseau);
+                            image.setRotation(90);
+                            image.animate().rotationBy(-90f).setDuration(800);
+                            animator.start();
+                        }
+                        else if (grille[i][j] == 0) {
+                            image.setImageDrawable(null);
+                        }
+                    }
+                    else if(grille[i][j]==0){
+                        image.setImageDrawable(null);
+                    }
             }
         }
     }
@@ -195,31 +212,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
-    private void initPopUpBackup(){
-        alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("");
-        alertDialogBuilder.setCancelable(false);
-        alertDialogBuilder.setNegativeButton("Menu", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                backToMenu();
-            }
-        });
-        alertDialogBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (winnerActivity.equals("nul")) {
-                    if (mInterstitialAd.isLoaded()) {
-                        mInterstitialAd.show();
-                    }
-                    // Reload an other Ad
-                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                }
-                controller.reset();
-            }
-        });
-    }
-
     private void backToMenu() {
         finish();
     }

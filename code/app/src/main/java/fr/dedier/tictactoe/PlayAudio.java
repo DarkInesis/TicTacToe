@@ -11,22 +11,21 @@ public class PlayAudio extends Service {
 
     public void onCreate(){
         super.onCreate();
-        objPlayer = MediaPlayer.create(this,R.raw.reset);
+        objPlayer = MediaPlayer.create(getApplicationContext(),R.raw.reset);
+        objPlayer.setLooping(true);
     }
 
     public int onStartCommand(Intent intent, int flags, int startId){
         objPlayer.start();
-        return 1;
+        return START_STICKY;
     }
 
     public void onStop(){
-        objPlayer.stop();
-        objPlayer.release();
+        objPlayer.pause();
     }
 
     public void onPause(){
-        objPlayer.stop();
-        objPlayer.release();
+        objPlayer.pause();
     }
     public void onDestroy(){
         objPlayer.stop();

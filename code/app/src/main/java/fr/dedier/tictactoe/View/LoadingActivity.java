@@ -2,7 +2,6 @@ package fr.dedier.tictactoe.View;
 
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
@@ -11,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import fr.dedier.tictactoe.PlayAudio;
 import fr.dedier.tictactoe.R;
 
 public class LoadingActivity extends AppCompatActivity {
@@ -37,7 +35,5 @@ public class LoadingActivity extends AppCompatActivity {
             }
         };
         timer.schedule(loadingTask,0,40);
-        Intent objIntent=new Intent(this,PlayAudio.class);
-        startService(objIntent);
     }
 }
